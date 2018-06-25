@@ -1,0 +1,21 @@
+packages:
+  - mda.lakes
+  - glmtools
+  
+  
+target_default: hypso_exp_files
+
+sources:
+  - R/model_file_prep.R
+  
+  
+targets:
+  hypso_exp_files:
+    depends:
+      - data/glm2.nml
+    
+  data/nhd_2360642_meteo.csv:
+    command: get_driver_file(target_name, nhd_id = I('nhd_2360642')) #nhd_2360642 is mille lacs 
+    
+  data/glm2.nml:
+    command: get_nml_file(target_name, nhd_id = I('nhd_2360642'), 'data/nhd_2360642_meteo.csv')
