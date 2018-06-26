@@ -17,11 +17,14 @@ run_export_temp <- function(outfile, nmlpath, simnml, ...){
   nml <- read_nml(nmlpath)
   nml <- set_nml(nml, arg_list = list(...))
   write_nml(glm_nml = nml, file = simnml)
+  
   run_glm('data')
   unlink(simnml)
-  temp_data <- get_temp(reference = 'surface')
-  plot_temp()
   
+  browser()
+  temp_data <- get_temp('data/output.nc', reference = 'surface', z_out = seq(0, 24, by=0.5))
+  plot_temp()
+  unlink('data/output.nc')
   readr::write_tsv(x = temp_data, path = outfile)
   
 }
