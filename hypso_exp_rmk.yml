@@ -1,6 +1,7 @@
 packages:
   - mda.lakes
   - glmtools
+  - readr
   
   
 target_default: hypso_exp_files
@@ -12,10 +13,24 @@ sources:
 targets:
   hypso_exp_files:
     depends:
-      - data/glm2.nml
+      - data/Mendota_barrel_simulation.tsv
     
   data/nhd_2360642_meteo.csv:
-    command: get_driver_file(target_name, nhd_id = I('nhd_2360642')) #nhd_2360642 is mille lacs 
+    command: get_driver_file(target_name, nhd_id = I('nhd_13293262')) #nhd_2360642 is mille lacs; nhd_13293262 is Mendota
     
-  data/glm2.nml:
-    command: get_nml_file(target_name, nhd_id = I('nhd_2360642'), 'data/nhd_2360642_meteo.csv')
+  barrel_bathy:
+    command: data.frame(depths = I(c(0,2,4,6,8,10,12,14,16,18,20,22,24)), areas = I(c(3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7,3.9e7)))
+
+  martini_bathy:
+    command: data.frame(depths = I(c(0,2,4,6,8,10,12,14,16,18,20,22,24)), areas = I(c(3.9e7,2.9e7,1.9e7,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5,3.9e5)))
+    
+  data/glm2_barrel.nml:
+    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = barrel_bathy)
+    
+  data/glm2_martini.nml:
+    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = martini_bathy)
+
+  data/Mendota_barrel_simulation.tsv:
+    command: run_export_temp(target_name, 'data/glm2_barrel.nml', simnml = I('data/glm2.nml'), stop = I('2014-12-30 00:00:00'))
+    
+  
