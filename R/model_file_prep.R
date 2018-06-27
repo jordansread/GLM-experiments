@@ -2,7 +2,10 @@
 
 get_driver_file <- function(filepath, nhd_id){
   temp_path <- mda.lakes::get_driver_path(nhd_id)
-  file.copy(from = temp_path, to = filepath)
+  
+  drivers <- driver_add_rain(read_csv(temp_path))
+  
+  write.csv(drivers, filepath, row.names=FALSE, quote=FALSE)
 }
 
 get_nml_file <- function(filepath, nhd_id, meteopath, ...){
