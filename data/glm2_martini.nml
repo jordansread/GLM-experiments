@@ -24,15 +24,15 @@
 /
 &time
    timefmt = 2
-   start = '2000-04-01 00:00:00'
-   stop = '2000-08-30 00:00:00'
-   dt = 86400
+   start = '1980-04-1 00:00:00'
+   stop = '2014-12-30 00:00:00'
+   dt = 3600
    timezone = 7
 /
 &output
    out_dir = '.'
    out_fn = 'output'
-   nsave = 1
+   nsave = 24
    csv_lake_fname = 'lake'
    csv_point_nlevs = 0
    csv_point_fname = 'WQ_'
