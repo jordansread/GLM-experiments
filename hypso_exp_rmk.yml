@@ -32,9 +32,9 @@ targets:
     command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = martini_bathy)
 
   data/Mendota_barrel_simulation.tsv:
-    command: run_export_temp(target_name, 'data/glm2_barrel.nml', simnml = I('data/glm2.nml'), stop = I('2004-12-30 00:00:00'), dt = I(3600), nsave=I(24))
+    command: run_export_temp(target_name, 'data/glm2_barrel.nml', simnml = I('data/glm2.nml'), start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
     
   data/Mendota_martini_simulation.tsv:
-    command: run_export_temp(target_name, 'data/glm2_martini.nml', simnml = I('data/glm2.nml'), stop = I('2004-12-30 00:00:00'), dt = I(3600), nsave=I(24))
+    command: run_export_temp(target_name, 'data/glm2_martini.nml', simnml = I('data/glm2.nml'), start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
     
     
