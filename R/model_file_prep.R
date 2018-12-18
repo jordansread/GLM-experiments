@@ -8,10 +8,15 @@ get_driver_file <- function(filepath, nhd_id){
   write.csv(drivers, filepath, row.names=FALSE, quote=FALSE)
 }
 
-get_nml_file <- function(filepath, nhd_id, meteopath, bathy, ...){
+get_nml_file <- function(filepath, nhd_id, meteopath, bathy = NULL, ...){
   
-  nml <- populate_base_lake_nml(site_id = nhd_id, bathy = bathy, 
-                                driver = meteopath)
+  if (!is.null(bathy)){
+    nml <- populate_base_lake_nml(site_id = nhd_id, bathy = bathy, 
+                                  driver = meteopath)
+  } else {
+    nml <- populate_base_lake_nml(site_id = nhd_id, driver = meteopath)
+  }
+  
   nml <- set_nml(nml, arg_list = list(...))
   write_nml(glm_nml = nml, file = filepath)
 }
