@@ -18,7 +18,7 @@ targets:
       - data/Mendota_barrel_simulation.feather
       - data/Mendota_cone_simulation.feather
     
-  data/nhd_2360642_meteo.csv:
+  data/nhd_13293262_meteo.csv:
     command: get_driver_file(target_name, nhd_id = I('nhd_13293262')) #nhd_2360642 is mille lacs; nhd_13293262 is Mendota
     
   barrel_bathy:
@@ -31,15 +31,15 @@ targets:
     command: data.frame(depths = I(c(0,2,4,6,8,10,12,14,16,18,20,22,24)), areas = I(c(3.9e+07,35750000,32500000,29250000,2.6e+07,22750000,19500000,16250001,13000001,9750001,6500001,3250001,1)))
   
   data/glm2_barrel.nml:
-    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = barrel_bathy,
+    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_13293262_meteo.csv'), bathy = barrel_bathy,
       start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
     
   data/glm2_martini.nml:
-    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = martini_bathy,
+    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_13293262_meteo.csv'), bathy = martini_bathy,
       start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
     
   data/glm2_cone.nml:
-    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = cone_bathy,
+    command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_13293262_meteo.csv'), bathy = cone_bathy,
       start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
 
   data/Mendota_barrel_simulation.feather:

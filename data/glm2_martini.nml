@@ -65,7 +65,7 @@
    albedo_mode = 1
    cloud_mode = 4
    subdaily = .false.
-   meteo_fl = 'nhd_2360642_meteo.csv'
+   meteo_fl = 'nhd_13293262_meteo.csv'
    wind_factor = 1
    sw_factor = 1
    lw_factor = 1
