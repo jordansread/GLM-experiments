@@ -25,6 +25,6 @@ run_export_temp <- function(outfile, nmlpath, simnml){
   unlink(simnml)
   temp_data <- get_temp('data/output.nc', reference = 'surface', z_out = seq(0, 24, by=0.5))
 
-  readr::write_tsv(x = temp_data, path = outfile)
+  feather::write_feather(temp_data, outfile)
   
 }

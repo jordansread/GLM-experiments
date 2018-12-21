@@ -2,6 +2,7 @@ packages:
   - mda.lakes
   - glmtools
   - readr
+  - feather
   
   
 target_default: hypso_exp_files
@@ -13,9 +14,9 @@ sources:
 targets:
   hypso_exp_files:
     depends:
-      - data/Mendota_martini_simulation.tsv
-      - data/Mendota_barrel_simulation.tsv
-      - data/Mendota_cone_simulation.tsv
+      - data/Mendota_martini_simulation.feather
+      - data/Mendota_barrel_simulation.feather
+      - data/Mendota_cone_simulation.feather
     
   data/nhd_2360642_meteo.csv:
     command: get_driver_file(target_name, nhd_id = I('nhd_13293262')) #nhd_2360642 is mille lacs; nhd_13293262 is Mendota
@@ -41,13 +42,14 @@ targets:
     command: get_nml_file(target_name, nhd_id = I('nhd_13293262'), I('nhd_2360642_meteo.csv'), bathy = cone_bathy,
       start = I('1980-04-1 00:00:00'), stop = I('2014-12-30 00:00:00'), dt = I(3600), nsave=I(24))
 
-  data/Mendota_barrel_simulation.tsv:
+  data/Mendota_barrel_simulation.feather:
     command: run_export_temp(target_name, 'data/glm2_barrel.nml', simnml = I('data/glm2.nml'))
     
-  data/Mendota_martini_simulation.tsv:
+    
+  data/Mendota_martini_simulation.feather:
     command: run_export_temp(target_name, 'data/glm2_martini.nml', simnml = I('data/glm2.nml'))
     
-  data/Mendota_cone_simulation.tsv:
+  data/Mendota_cone_simulation.feather:
     command: run_export_temp(target_name, 'data/glm2_cone.nml', simnml = I('data/glm2.nml'))
     
     
