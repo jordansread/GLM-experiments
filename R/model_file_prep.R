@@ -25,8 +25,8 @@ run_export_temp <- function(outfile, nmlpath, simnml){
   
   nml <- read_nml(nmlpath)
   write_nml(glm_nml = nml, file = simnml)
-  
-  run_glm('data',  verbose = FALSE)
+  message(get_nml_value(nml, 'A'))
+  run_glm('data',  verbose = TRUE)
   unlink(simnml)
   plot_temp('data/output.nc', reference = 'surface')
   temp_data <- get_temp('data/output.nc', reference = 'surface', z_out = seq(0, 24, by=0.5))
