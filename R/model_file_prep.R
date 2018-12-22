@@ -25,12 +25,13 @@ run_export_temp <- function(outfile, nmlpath, simnml){
   
   nml <- read_nml(nmlpath)
   write_nml(glm_nml = nml, file = simnml)
-  message(get_nml_value(nml, 'A'))
   run_glm('data',  verbose = TRUE)
   unlink(simnml)
   plot_temp('data/output.nc', reference = 'surface')
   temp_data <- get_temp('data/output.nc', reference = 'surface', z_out = seq(0, 24, by=0.5))
-
-  feather::write_feather(temp_data, outfile)
+  model_out <- get_var(file = 'data/output.nc', var_name = 'hice') %>% mutate(ice = hice > 0) %>% select(-hice) %>% 
+    left_join(temp_data, .,  by = 'DateTime')
+  
+  feather::write_feather(x = model_out, path = outfile)
   
 }
